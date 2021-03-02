@@ -24,7 +24,8 @@ app.use('/add-product', (req, res, next) => {
     <button type="submit">Add Product</button></form>'); // note that return statement is not used
 });
 
-app.use('/product', (req, res, next) => {
+// app.use('/product', (req, res, next) => {
+app.post('/product', (req, res, next) => {
     const data = req.body
     console.log(data);
     res.redirect('/');
