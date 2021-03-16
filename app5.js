@@ -1,5 +1,32 @@
 const fs = require('fs');
 
+// CREATE A TEST DIRECTORY WITH FILES
+const createNonEmptyDir = ()=>{
+    fs.mkdirSync('example',(err)=>{
+        if(err){
+            console.log(err);
+        } else {
+            console.log('Successfully created directory');
+        }
+    });
+    fs.writeFileSync('./example/a.txt', 'Some data',(err)=>{
+        if(err){
+            console.log(err);
+        } else {
+            console.log('Successfully created a.txt');
+        }
+    });
+    fs.writeFileSync('./example/b.txt', 'Some data',(err)=>{
+        if(err){
+            console.log(err);
+        } else {
+            console.log('Successfully created b.txt');
+        }
+    });
+};
+
+
+
 // // create/make directory
 
 // fs.mkdir('tutorialDir', (err) => {
@@ -44,3 +71,30 @@ const fs = require('fs');
 //     })
 // }
 // });
+
+// deleting multiple files in the directory
+
+createNonEmptyDir();
+
+fs.readdir('example', (err, files) => {
+    if (err) {
+        console.log(err);
+    } else {
+        for(let file of files){
+            fs.unlink(`./example/${file}`, (err)=>{
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log('File deleted successfully');
+                }
+            });
+        }
+        fs.rmdir('example', (err)=>{
+if(err){
+    console.log(err);
+} else {
+    console.log('Successfully deleted the directory');
+}
+        });
+    }
+});
